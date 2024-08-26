@@ -25,3 +25,10 @@ jobs:
       - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
         name: Execute build script
         run: bash ./br_build.sh
+      - name: 'Tar files'
+        run: tar -cvf buildroot.tar /build
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v4
+        with:
+          name: buildroot
+          path: buildroot.tar

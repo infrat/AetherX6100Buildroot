@@ -8,6 +8,8 @@ ENV TZ=UTC
 
 # Update the system
 RUN apt-get update && apt-get upgrade -y
+RUN apt install software-properties-common -y
+RUN add-apt-repository universe
 
 # Set the correct locale
 RUN apt-get install -y locales
@@ -16,7 +18,7 @@ ENV LANG en_US.utf8
 
 # Install dependencies (but not asciidoc because it wants to install LaTeX)
 RUN apt-get install -y git build-essential wget cpio unzip rsync bc \
-    libncurses5 libncurses5-dev libncursesw5-dev screen file cmake \
+    libncurses5-dev libncursesw5-dev screen file cmake \
     python3 python3-dev python3-setuptools python3-pip
 
 # Make a working dir
@@ -29,4 +31,4 @@ COPY . ./
 RUN chmod +x entrypoint.sh
 
 # Give it a (replaceable) entrypoint
-ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "./entrypoint.sh"]
