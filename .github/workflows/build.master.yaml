@@ -7,13 +7,17 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: Install jq tool
+      - name: Install required packages
+        env:
+          LANG: en_US.UTF-8
         run: |
           sudo apt-get update 
           sudo apt-get upgrade -y
           sudo apt-get install -y locales
           sudo localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
-          sudo export LANG=en_US.UTF-8
           sudo apt-get install -y git build-essential wget cpio unzip rsync bc 
           sudo libncurses5 libncurses5-dev libncursesw5-dev screen file cmake 
           sudo python3 python3-dev python3-setuptools python3-pip
+      - name: ls -lah
+        run: |
+          sudo ls -lah
