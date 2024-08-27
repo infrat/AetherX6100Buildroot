@@ -30,8 +30,8 @@ jobs:
         run: ls -lah build
       - name: 'Tar files'
         run: tar -czf buildroot.tar.gz build
-      # - name: 'Upload Artifact'
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: buildroot
-      #     path: buildroot.tar.gz
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v4
+        with:
+          name: buildroot
+          path: buildroot.tar.gz
